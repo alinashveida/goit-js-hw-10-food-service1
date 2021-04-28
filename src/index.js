@@ -35,28 +35,28 @@ const Theme = {
 
   function changeTheme(event){
       if(input.checked){
-        body.classList.add(Theme.DARK)
+        updateClass(Theme.DARK, Theme.LIGHT)
         localStorage.setItem("theme", Theme.DARK)
-
-        if(body.classList.contains(Theme.LIGHT)){
-            body.classList.remove(Theme.LIGHT)
-        }
       }
-      if(!input.checked){
-        body.classList.add(Theme.LIGHT) || body.classList.remove(Theme.DARK);
+
+      else{
+        updateClass(Theme.LIGHT, Theme.DARK)
         localStorage.setItem("theme", Theme.LIGHT)
       }
       
     }
 
+    function updateClass(addClass, removeClass){
+      body.classList.add(addClass);
+      body.classList.remove(removeClass)
+
+    }
+
     function establishmentTheme (){
-        const currentTheme = localStorage.getItem("theme");  
-      body.classList.add(currentTheme)
+        const currentTheme = localStorage.getItem("theme")||Theme.LIGHT;  
+      body.classList.add(currentTheme);
       
-      if(currentTheme === Theme.DARK){
-        input.checked = true;
-        
-      }
+      input.checked = currentTheme === Theme.DARK;
 
     }
 
